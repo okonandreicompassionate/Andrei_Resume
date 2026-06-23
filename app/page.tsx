@@ -20,6 +20,10 @@ const SKILLS = [
   { icon: "◎", name: "Motion",           desc: "Framer Motion, spring physics, orchestrated sequences." },
   { icon: "⊞", name: "Supabase",         desc: "Auth, realtime, and Postgres — full-stack from the frontend." },
   { icon: "⊹", name: "Tailwind CSS",     desc: "Rapid, precise styling with a utility-first approach." },
+  { icon: "◀", name: "Redux & State",    desc: "Complex state management, middleware, and data flow optimization." },
+  { icon: "⬢", name: "Performance",      desc: "Core Web Vitals, bundle optimization, and rendering performance." },
+  { icon: "◉", name: "REST APIs",        desc: "API integration, error handling, and data serialization." },
+  { icon: "▲", name: "Figma & Design",   desc: "Component design, prototyping, and collaborative design systems." },
 ];
 
 const EXPERIENCE = [
@@ -404,23 +408,8 @@ function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-        style={{
-          position: "absolute",
-          bottom: 36,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 6,
-        }}
-      >
-        <span style={{ fontSize: 11, color: "rgba(255,255,255,0.18)", letterSpacing: "0.18em" }}>SCROLL</span>
+     
+        
         <motion.div
           animate={{ scaleY: [1, 0.3, 1], opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -431,7 +420,7 @@ function Hero() {
             transformOrigin: "top",
           }}
         />
-      </motion.div>
+     
     </section>
   );
 }
@@ -542,6 +531,7 @@ function Glass({ children, style = {} }: { children: React.ReactNode; style?: Re
   return (
     <div
       style={{
+
         background: "rgba(255,255,255,0.055)",
         backdropFilter: "blur(28px) saturate(180%)",
         WebkitBackdropFilter: "blur(28px) saturate(180%)",
@@ -626,33 +616,93 @@ function About() {
 // ─── Skills ───────────────────────────────────────────────────────────────────
 
 function Skills() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <Section id="skills">
       <SectionLabel>Skills</SectionLabel>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10 }}>
-        {SKILLS.map(({ icon, name, desc }, i) => (
-          <FadeIn key={name} delay={i * 0.07}>
+      <motion.div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: 20,
+          background: "rgba(255,255,255,0.02)",
+        }}
+      >
+        {/* Gradient overlay — left */}
+        <motion.div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: 80,
+            height: "100%",
+            background: "linear-gradient(to right, rgba(13,17,23,1), transparent)",
+            zIndex: 10,
+            pointerEvents: "none",
+          }}
+        />
+        {/* Gradient overlay — right */}
+        <motion.div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: 80,
+            height: "100%",
+            background: "linear-gradient(to left, rgba(13,17,23,1), transparent)",
+            zIndex: 10,
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Carousel container */}
+        <motion.div
+          style={{
+            display: "flex",
+            gap: 12,
+            padding: "20px",
+            width: "fit-content",
+          }}
+          animate={{ x: isHovered ? 0 : -1200 }}
+          transition={{
+            x: {
+              duration: isHovered ? 0.5 : 30,
+              ease: isHovered ? "easeOut" : "linear",
+              repeat: isHovered ? 0 : Infinity,
+            },
+          }}
+        >
+          {/* Duplicate skills for seamless looping */}
+          {[...SKILLS, ...SKILLS].map(({ icon, name, desc }, i) => (
             <motion.div
-              whileHover={{ scale: 1.03, y: -4, borderColor: "rgba(255,255,255,0.22)" }}
+              key={`${name}-${i}`}
+              whileHover={{ scale: 1.03, y: -4 }}
               transition={{ type: "spring", stiffness: 280, damping: 20 }}
+              style={{
+                minWidth: 260,
+                minHeight: 200,
+              }}
             >
-              <Glass style={{ padding: "26px 24px", height: "100%" }}>
+              <Glass style={{ padding: "26px 24px", height: "100%", display: "flex", flexDirection: "column" }}>
                 <motion.div
                   initial={{ rotate: -20, opacity: 0 }}
                   whileInView={{ rotate: 0, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  transition={{ delay: (i % SKILLS.length) * 0.08, duration: 0.5 }}
                   style={{ fontSize: 22, marginBottom: 14, color: "rgba(255,255,255,0.45)", fontWeight: 300 }}
                 >
                   {icon}
                 </motion.div>
                 <div style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.85)", marginBottom: 8 }}>{name}</div>
-                <div style={{ fontSize: 13, lineHeight: 1.65, color: "rgba(255,255,255,0.34)" }}>{desc}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.65, color: "rgba(255,255,255,0.34)", flex: 1 }}>{desc}</div>
               </Glass>
             </motion.div>
-          </FadeIn>
-        ))}
-      </div>
+          ))}
+        </motion.div>
+      </motion.div>
     </Section>
   );
 }
