@@ -30,27 +30,27 @@ const EXPERIENCE = [
   {
     period: "2025 — Now",
     role: "Frontend Engineer",
-    company: "Freelance",
-    desc: "Building scalable interfaces, dashboards, and modern web applications using React, Next.js, and TypeScript. Shipped multiple production products including e-commerce and SaaS platforms.",
+    company: "Geeks Challenge",
+    desc: "Building scalable interfaces, dashboards, and modern web applications using React, Next.js, and TypeScript. Shipped multiple production products including multi-purpose forms and SaaS platforms.",
   },
   {
-    period: "2024 — 2025",
+    period: "2026 — Now",
     role: "Web Developer",
-    company: "Contract",
+    company: "Zora Communications Limited",
     desc: "Landing pages, admin panels, and API integrations — focused on performance and user experience.",
   },
 ];
 
 const PROJECTS = [
-  { icon: "⊞", name: "EXILES",             desc: "Dark luxury streetwear e-commerce — cart, Paystack payments, admin dashboard, and live inventory.", tag: "Next.js + Supabase", live: true },
-  { icon: "⊹", name: "LoisTech",           desc: "Smart home e-commerce platform with a full product system, shop, cart, and NDPR-compliant privacy.", tag: "Next.js + Paystack", live: true },
-  { icon: "◈", name: "Vendorfy",           desc: "Nigerian vendor trust micro-service — AI-powered trust scores, community reviews, and a REST API.", tag: "Next.js + Groq", live: true },
-  { icon: "⊟", name: "Analytics Dashboard", desc: "Real-time data visualisation platform with RTK Query, responsive layouts, and adaptive charts.", tag: "React + Redux", live: false },
+  { image: "https://i.imgur.com/8ZJQZQZ.png", name: "EXILES",             desc: "Dark luxury streetwear e-commerce — cart, Paystack payments, admin dashboard, and live inventory.", tag: "Next.js + Supabase", live: true, link: "" },
+  { image: "https://i.imgur.com/M3gdyHq.png", name: "LoisTech",           desc: "Smart home e-commerce platform with a full product system, shop, cart, and NDPR-compliant privacy.", tag: "Next.js + Paystack", live: true, link: "https://shop.loistech.com.ng/shop" },
+  { image: "https://i.imgur.com/toVygWr.png", name: "Vendorfy",           desc: "Nigerian vendor trust micro-service — AI-powered trust scores, community reviews, and a REST API.", tag: "Next.js + Groq", live: true, link: "https://check-vendor.vercel.app/" },
+  { image: "https://i.imgur.com/Re649MR.png", name: "Analytics Dashboard", desc: "Real-time data visualisation platform with RTK Query, responsive layouts, and adaptive charts.", tag: "React + Redux", live: false, link: "https://assesment-sage-iota.vercel.app/" },
 ];
 
 const STATS = [
   { value: "20+", label: "Projects shipped" },
-  { value: "3+",  label: "Years building" },
+  { value: "2+",  label: "Years building" },
   { value: "∞",   label: "Attention to detail" },
 ];
 
@@ -401,16 +401,43 @@ function Hero() {
           initial={{ opacity: 0, y: 16, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: 0.85, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}
+          style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap", alignItems: "center" }}
         >
           <GlassButton href="#work">View projects</GlassButton>
           <SolidButton href="#contact">Get in touch</SolidButton>
+          <motion.a
+            href="https://github.com/okonandreicompassionate"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "13px 22px",
+              borderRadius: 100,
+              background: "rgba(255,255,255,0.07)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "0.5px solid rgba(255,255,255,0.16)",
+              textDecoration: "none",
+              cursor: "pointer",
+              fontSize: 14,
+              fontWeight: 500,
+              color: "rgba(255,255,255,0.8)",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+            GitHub
+          </motion.a>
         </motion.div>
       </motion.div>
 
-     
-        
-        <motion.div
+      <motion.div
           animate={{ scaleY: [1, 0.3, 1], opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           style={{
@@ -757,14 +784,19 @@ function Projects() {
     <Section id="work">
       <SectionLabel>Projects</SectionLabel>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 10 }}>
-        {PROJECTS.map(({ icon, name, desc, tag, live }, i) => (
+        {PROJECTS.map(({ image, name, desc, tag, live, link }, i) => (
           <FadeIn key={name} delay={i * 0.07}>
-            <motion.div
+            <motion.a
+              href={link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
               onHoverStart={() => setHovered(name)}
               onHoverEnd={() => setHovered(null)}
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 240, damping: 18 }}
               style={{
+                display: "block",
+                textDecoration: "none",
                 background: hovered === name ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.055)",
                 backdropFilter: "blur(28px) saturate(180%)",
                 WebkitBackdropFilter: "blur(28px) saturate(180%)",
@@ -795,12 +827,22 @@ function Projects() {
                   overflow: "hidden",
                 }}
               >
-                <motion.span
-                  animate={{ scale: hovered === name ? 1.3 : 1, rotate: hovered === name ? 15 : 0 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 16 }}
-                >
-                  {icon}
-                </motion.span>
+                {image ? (
+                  <motion.img
+                    src={image}
+                    alt={name}
+                    animate={{ scale: hovered === name ? 1.3 : 1, rotate: hovered === name ? 15 : 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 16 }}
+                    style={{
+                      width: "80%",
+                      height: "80%",
+                      objectFit: "cover",
+                      borderRadius: 8,
+                    }}
+                  />
+                ) : (
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.25)" }}>No image</div>
+                )}
               </motion.div>
 
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
@@ -844,7 +886,7 @@ function Projects() {
               >
                 ↗
               </motion.span>
-            </motion.div>
+            </motion.a>
           </FadeIn>
         ))}
       </div>
@@ -890,7 +932,7 @@ function Contact() {
           <p style={{ fontSize: 15, color: "rgba(255,255,255,0.36)", lineHeight: 1.7, marginBottom: 36 }}>
             Open to frontend engineering roles, freelance work, and product collaborations.
           </p>
-          <SolidButton href="mailto:hello@andreiokon.com">Get in touch →</SolidButton>
+          <SolidButton href="mailto:okoncompassionate@gmail.com">Get in touch →</SolidButton>
         </motion.div>
       </FadeIn>
     </section>
@@ -955,7 +997,7 @@ export default function Portfolio() {
           <Contact />
 
           <footer style={{ textAlign: "center", padding: "28px 20px", fontSize: 12, color: "rgba(255,255,255,0.14)" }}>
-            © {new Date().getFullYear()} Andrei Okon · Built with Next.js
+            © {new Date().getFullYear()} Andrei Okon · Powered by Next.js
           </footer>
         </div>
       </div>

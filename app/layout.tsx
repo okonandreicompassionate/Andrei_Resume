@@ -13,6 +13,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Andrei Okon",
   description: "Frontend Engineer Portfolio",
+  icons: {
+    icon: "https://i.imgur.com/sWBWKT9.png",
+  },
 };
 
 export default function RootLayout({
