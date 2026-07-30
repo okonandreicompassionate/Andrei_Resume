@@ -671,10 +671,10 @@ function FadeIn({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 48, filter: "blur(12px)", scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.div>
@@ -693,9 +693,7 @@ function Glass({
   return (
     <div
       style={{
-        background: "rgba(255,255,255,0.055)",
-        backdropFilter: "blur(28px) saturate(180%)",
-        WebkitBackdropFilter: "blur(28px) saturate(180%)",
+        background: "rgba(255,255,255,0.08)",
         border: "0.5px solid rgba(255,255,255,0.12)",
         borderRadius: 20,
         ...style,
@@ -823,128 +821,65 @@ function About() {
 // ─── Skills ───────────────────────────────────────────────────────────────────
 
 function Skills() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <Section id="skills">
       <SectionLabel>Skills</SectionLabel>
-      <motion.div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+      <div
         style={{
-          position: "relative",
-          overflow: "hidden",
-          borderRadius: 20,
-          background: "rgba(255,255,255,0.02)",
+          display: "grid",
+          gap: 18,
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
         }}
       >
-        {/* Gradient overlay — left */}
-        <motion.div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: 80,
-            height: "100%",
-            background:
-              "linear-gradient(to right, rgba(13,17,23,1), transparent)",
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        />
-        {/* Gradient overlay — right */}
-        <motion.div
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            width: 80,
-            height: "100%",
-            background:
-              "linear-gradient(to left, rgba(13,17,23,1), transparent)",
-            zIndex: 10,
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Carousel container */}
-        <motion.div
-          style={{
-            display: "flex",
-            gap: 12,
-            padding: "20px",
-            width: "fit-content",
-          }}
-          animate={{ x: isHovered ? 0 : -1200 }}
-          transition={{
-            x: {
-              duration: isHovered ? 0.5 : 30,
-              ease: isHovered ? "easeOut" : "linear",
-              repeat: isHovered ? 0 : Infinity,
-            },
-          }}
-        >
-          {/* Duplicate skills for seamless looping */}
-          {[...SKILLS, ...SKILLS].map(({ icon, name, desc }, i) => (
-            <motion.div
-              key={`${name}-${i}`}
-              whileHover={{ scale: 1.03, y: -4 }}
-              transition={{ type: "spring", stiffness: 280, damping: 20 }}
+        {SKILLS.map(({ icon, name, desc }) => (
+          <motion.div
+            key={name}
+            whileHover={{ y: -3, scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 260, damping: 24 }}
+            style={{ minHeight: 200 }}
+          >
+            <Glass
               style={{
-                minWidth: 260,
-                minHeight: 200,
+                padding: "26px 24px",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              <Glass
+              <div
                 style={{
-                  padding: "26px 24px",
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
+                  fontSize: 22,
+                  marginBottom: 14,
+                  color: "rgba(255,255,255,0.45)",
+                  fontWeight: 300,
                 }}
               >
-                <motion.div
-                  initial={{ rotate: -20, opacity: 0 }}
-                  whileInView={{ rotate: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    delay: (i % SKILLS.length) * 0.08,
-                    duration: 0.5,
-                  }}
-                  style={{
-                    fontSize: 22,
-                    marginBottom: 14,
-                    color: "rgba(255,255,255,0.45)",
-                    fontWeight: 300,
-                  }}
-                >
-                  {icon}
-                </motion.div>
-                <div
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.85)",
-                    marginBottom: 8,
-                  }}
-                >
-                  {name}
-                </div>
-                <div
-                  style={{
-                    fontSize: 13,
-                    lineHeight: 1.65,
-                    color: "rgba(255,255,255,0.34)",
-                    flex: 1,
-                  }}
-                >
-                  {desc}
-                </div>
-              </Glass>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
+                {icon}
+              </div>
+              <div
+                style={{
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.85)",
+                  marginBottom: 8,
+                }}
+              >
+                {name}
+              </div>
+              <div
+                style={{
+                  fontSize: 13,
+                  lineHeight: 1.65,
+                  color: "rgba(255,255,255,0.34)",
+                  flex: 1,
+                }}
+              >
+                {desc}
+              </div>
+            </Glass>
+          </motion.div>
+        ))}
+      </div>
     </Section>
   );
 }
