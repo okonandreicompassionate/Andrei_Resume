@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
+
+const EMAIL = "okoncompassionate@gmail.com";
+const GITHUB = "https://github.com/okonandreicompassionate";
+const WHATSAPP = "https://wa.me/2347058077794";
 
 export default function ContactPage() {
   const [copied, setCopied] = useState(false);
-  const email = "okoncompassionate@gmail.com";
-  const mailto = `mailto:${email}?subject=${encodeURIComponent("Let’s work together")}&body=${encodeURIComponent("Hi Andrei,%0D%0A%0D%0AI'd love to discuss a frontend or product collaboration. Please let me know your availability.%0D%0A%0D%0AThanks,")}`;
+  const mailto = `mailto:${EMAIL}?subject=${encodeURIComponent("Let’s work together")}&body=${encodeURIComponent("Hi Andrei,%0D%0A%0D%0AI'd love to discuss a frontend or product collaboration. Please let me know your availability.%0D%0A%0D%0AThanks,")}`;
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(email);
+      await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -20,232 +23,135 @@ export default function ContactPage() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "100px 20px",
-        background: "#0d1117",
-        color: "#f0f4f8",
-        fontFamily: "'Inter', sans-serif",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    <div className="relative min-h-screen overflow-hidden bg-[#07080b] text-[#f0f4f8]">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0"
         style={{
-          width: "100%",
-          maxWidth: 760,
-          borderRadius: 28,
-          padding: "44px 36px",
-          background: "rgba(255,255,255,0.06)",
-          backdropFilter: "blur(32px) saturate(180%)",
-          WebkitBackdropFilter: "blur(32px) saturate(180%)",
-          border: "0.5px solid rgba(255,255,255,0.14)",
-          boxShadow: "0 30px 70px rgba(0, 0, 0, 0.35)",
+          background: [
+            "radial-gradient(900px 600px at -5% -8%, rgba(26,58,92,0.55), transparent 70%)",
+            "radial-gradient(700px 600px at 108% 42%, rgba(15,45,31,0.55), transparent 70%)",
+            "radial-gradient(700px 600px at 20% 108%, rgba(28,16,48,0.55), transparent 70%)",
+            "#07080b",
+          ].join(","),
         }}
-      >
-        <div style={{ marginBottom: 18 }}>
-          <p
-            style={{
-              fontSize: 12,
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.35)",
-              marginBottom: 12,
-            }}
-          >
-            Contact
-          </p>
-          <h1
-            style={{
-              fontSize: "clamp(36px, 6vw, 56px)",
-              fontWeight: 300,
-              lineHeight: 1.05,
-              color: "rgba(255,255,255,0.94)",
-              marginBottom: 18,
-            }}
-          >
-            Let’s start something exceptional.
-          </h1>
-          <p
-            style={{
-              fontSize: 16,
-              lineHeight: 1.85,
-              color: "rgba(255,255,255,0.46)",
-              maxWidth: 640,
-            }}
-          >
-            I’m available for frontend engineering contracts, long-term roles,
-            and product partnerships. Reach out and let’s talk about building
-            polished, fast, and thoughtful web experiences together.
-          </p>
-        </div>
+      />
 
-        <div style={{ display: "grid", gap: 18, marginTop: 24 }}>
-          <div style={{ display: "grid", gap: 12 }}>
-            <a
-              href={mailto}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "16px 28px",
-                borderRadius: 100,
-                textDecoration: "none",
-                fontWeight: 500,
-                fontSize: 14,
-                color: "#0d1117",
-                background: "#f0f4f8",
-                width: "fit-content",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4 4h16v16H4z" />
-                  <polyline points="4,4 12,13 20,4" />
-                </svg>
-              </span>
-              Email me
-            </a>
-            <button
-              onClick={copyEmail}
-              type="button"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "16px 28px",
-                borderRadius: 100,
-                border: "1px solid rgba(255,255,255,0.12)",
-                background: "rgba(255,255,255,0.08)",
-                color: "#f0f4f8",
-                cursor: "pointer",
-                width: "fit-content",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M8 6h11v11" />
-                  <path d="M8 17H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9" />
-                </svg>
-              </span>
-              {copied ? "Copied!" : "Copy email"}
-            </button>
-            <a
-              href="https://wa.me/2347058077794"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "16px 28px",
-                borderRadius: 100,
-                textDecoration: "none",
-                fontWeight: 500,
-                fontSize: 14,
-                color: "#0d1117",
-                background: "#f0f4f8",
-                width: "fit-content",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16.5 3.5c-1.5-.5-3.2-.5-4.7 0-3.9 1.4-6.7 5.1-6.7 9.5 0 1.5.4 2.9 1.1 4.1L3 21l4-1.1c1.1.6 2.5.9 3.8.9 4.4 0 8.1-2.8 9.5-6.7.5-1.5.5-3.2 0-4.7.1 0 .1 0 0 0z" />
-                  <path d="M16.5 3.5c1.4 1.7 1.3 4.1-.1 5.8L14 10.7" />
-                </svg>
-              </span>
-              +234 705 807 7794
-            </a>
-          </div>
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1100px] flex-col px-5 py-8 sm:px-8">
+        <header className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[13px] font-medium text-white/75 transition hover:border-white/20 hover:text-white"
+          >
+            Andrei Okon
+          </Link>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+          <nav className="flex items-center gap-2 rounded-full border border-white/10 bg-[#0d1117]/70 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl">
             <Link
               href="/"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "14px 24px",
-                borderRadius: 100,
-                border: "0.5px solid rgba(255,255,255,0.18)",
-                textDecoration: "none",
-                color: "rgba(255,255,255,0.88)",
-                background: "rgba(255,255,255,0.05)",
-              }}
+              className="rounded-full px-3 py-1.5 text-[13px] text-white/60 transition hover:bg-white/5 hover:text-white/90"
             >
-              Back to home
+              Home
             </Link>
             <a
-              href="https://github.com/okonandreicompassionate"
+              href={GITHUB}
               target="_blank"
               rel="noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "14px 24px",
-                borderRadius: 100,
-                textDecoration: "none",
-                color: "rgba(255,255,255,0.88)",
-                background: "rgba(255,255,255,0.05)",
-                border: "0.5px solid rgba(255,255,255,0.18)",
-              }}
+              className="rounded-full px-3 py-1.5 text-[13px] text-white/60 transition hover:bg-white/5 hover:text-white/90"
             >
-              View GitHub
+              GitHub
             </a>
-          </div>
-        </div>
-      </motion.div>
+          </nav>
+        </header>
+
+        <main className="flex flex-1 items-center justify-center py-12 sm:py-20">
+          <motion.section
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-[760px] rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_30px_70px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-10"
+          >
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#4ecca3]/25 bg-[#4ecca3]/10 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#4ecca3]" />
+              <span className="text-xs text-[#4ecca3]">Available for new projects</span>
+            </div>
+
+            <p className="text-[11px] font-medium tracking-[0.24em] text-white/35 uppercase">
+              Contact
+            </p>
+
+            <h1 className="mt-4 max-w-xl text-[clamp(40px,6vw,68px)] font-light leading-[0.96] tracking-[-0.045em] text-white/95">
+              Let’s build something exceptional.
+            </h1>
+
+            <p className="mt-5 max-w-[620px] text-base leading-[1.8] text-white/45">
+              I’m available for frontend engineering contracts, long-term roles,
+              and product partnerships. Reach out and let’s talk about building
+              polished, fast, and thoughtful web experiences together.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={mailto}
+                className="rounded-full bg-white/90 px-6 py-3 text-sm font-medium text-[#0d1117] transition hover:-translate-y-0.5 hover:bg-white"
+              >
+                Email me
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-medium text-white/80 transition hover:-translate-y-0.5 hover:bg-white/10"
+              >
+                {copied ? "Copied!" : "Copy email"}
+              </button>
+              <a
+                href={WHATSAPP}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-medium text-white/80 transition hover:-translate-y-0.5 hover:bg-white/10"
+              >
+                WhatsApp
+              </a>
+            </div>
+
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              <a
+                href={mailto}
+                className="rounded-2xl border border-white/10 bg-[#0d1117]/60 p-4 text-left transition hover:border-white/20 hover:bg-[#0d1117]"
+              >
+                <div className="text-[11px] uppercase tracking-[0.18em] text-white/30">
+                  Email
+                </div>
+                <div className="mt-2 text-sm text-white/80">{EMAIL}</div>
+              </a>
+
+              <a
+                href={WHATSAPP}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl border border-white/10 bg-[#0d1117]/60 p-4 text-left transition hover:border-white/20 hover:bg-[#0d1117]"
+              >
+                <div className="text-[11px] uppercase tracking-[0.18em] text-white/30">
+                  Phone
+                </div>
+                <div className="mt-2 text-sm text-white/80">+234 705 807 7794</div>
+              </a>
+
+              <a
+                href={GITHUB}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl border border-white/10 bg-[#0d1117]/60 p-4 text-left transition hover:border-white/20 hover:bg-[#0d1117]"
+              >
+                <div className="text-[11px] uppercase tracking-[0.18em] text-white/30">
+                  GitHub
+                </div>
+                <div className="mt-2 text-sm text-white/80">@okonandreicompassionate</div>
+              </a>
+            </div>
+          </motion.section>
+        </main>
+      </div>
     </div>
   );
 }
